@@ -22,11 +22,8 @@
 }
 
 .user-info {
-  margin-top: 9px;
-}
-
-.nav {
-  margin-top: 5px;
+  margin-top: .8rem;
+  margin-bottom: .8rem;
 }
 
 .navbar-nav {
@@ -35,4 +32,12 @@
 
 .sign-up-btn {
   padding: 10px 15px;
+}
+
+.avatar {
+  height: 100%;
+}
+
+.avatar img {
+  margin: auto;
 }
