@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_least(1) }
 
-
   # Shoulda tests for email
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email) }
@@ -22,6 +21,14 @@ RSpec.describe User, type: :model do
   describe "attributes" do
     it "should have name and email attributes" do
       expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
+    end
+  end
+
+  describe "capitalize name" do
+    let(:user_with_lowcase_name) { User.create!(name: "bloccit user", password: "password", email: "user@bloccit.com") }
+
+    it "should capitalize the first and last name" do
+      expect(user_with_lowcase_name).to have_attributes(name: "Bloccit User")
     end
   end
 
