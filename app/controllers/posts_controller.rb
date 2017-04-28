@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_sign_in, except: :show
-  before_action :authorize_user, except: [:show, :new, :create]
+  before_action :authorize_user_posts, except: [:show, :new, :create, :update, :edit]
+  before_action :auth_admin_mod, except: [:show, :delete, :new, :create]
 
   def create
     @topic = Topic.find(params[:topic_id])
@@ -61,9 +62,18 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body)
   end
 
-  def authorize_user
+  def auth_admin_mod
     post = Post.find(params[:id])
-    
+
+    unless current_user == post.user || current_user.moderator? || current_user.admin?
+      flash[:alert] = "You do not have the required permission to access this feature."
+      redirect_to [post.topic, post]
+    end
+  end
+
+  def authorize_user_posts
+    post = Post.find(params[:id])
+
     unless current_user == post.user || current_user.admin?
       flash[:alert] = "You must be an admin to do that."
       redirect_to [post.topic, post]
