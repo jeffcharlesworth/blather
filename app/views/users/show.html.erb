@@ -18,9 +18,32 @@
     </div>
   </div>
 </div>
+<div class="col-md-7">
+  <% if has_posts(@user) %>
+    <h2>Posts</h2>
+    <%= render @user.posts %>
+  <% else %>
+    <h3><%= "#{@user.name}" %> has no posts.</h3>
+  <% end %>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
-
-<h2>Comments</h2>
-<%= render @user.comments %>
+  <% if has_comments(@user) %>
+    <h2>Comments</h2>
+    <%= render @user.comments %>
+  <% else %>
+    <h3><%= "#{@user.name}" %> has no comments.</h3>
+  <% end %>
+</div>
+<div class="col-md-5">
+  <% @favorites.each do |favorite| %>
+    <div class="favorite-container">
+      <%= image_tag favorite.post.user.avatar_url(30) %>
+      <%= link_to favorite.post.title, [favorite.post.topic, favorite.post], class: "favorite-link" %> <br />
+  </div>
+  <div class="col-sm-4">
+    <small>votes: <%= favorite.post.points %></small>
+  </div>
+  <div class="col-sm-8">
+    <small>comments: <%= favorite.post.comments.count %></small>
+  </div>
+  <% end %>
+</div>
