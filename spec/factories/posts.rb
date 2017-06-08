@@ -4,5 +4,6 @@ FactoryGirl.define do
     body RandomData.random_paragraph
     topic
     rank 0.0
+    user { FactoryGirl.create(:user) } 
   end
 end
