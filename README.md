@@ -1,11 +1,24 @@
-Synopsis
+## Synopsis
 
 Bloccit is a reddit like application. The purpose of this project was an understanding of RoR and more specific topics like authentication, test driven development, automated mailing systems and model relations. Bloccit allows users to sign up, create topics and comments, favorite and receive updates on comments via email. 
 
-Installation
+## Installation
 
 -Ruby 2.1
 -RoR 4.2.5
+
+To get started with the app, clone the repo and then install the needed gems:
+
+$ bundle install --without production
+Next, migrate the database:
+
+$ rails db:migrate
+Finally, run the test suite to verify that everything is working correctly:
+
+$ rails rspec
+If the test suite passes, you'll be ready to run the app in a local server:
+
+$ rails server
 
 Tests
 
@@ -24,3 +37,7 @@ Points of Interest
   app/models/user.rb
 -TDD
   spec/
+  
+## Credit
+
+Jeff Charlesworth. Some samples provided by Bloc for learning purposes. No code copied. 
